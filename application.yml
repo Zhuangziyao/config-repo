@@ -1,0 +1,21 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: service-couple
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: ${SPRING_CONFIG_URI:http://localhost:8761}
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    #是否向注册中心注册自己（因为它就是注册中心，负载均衡时需要用到）
+    register-with-eureka: false
+    #是否需要检索服务（检索服务是client端的事）
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
